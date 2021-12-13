@@ -13,6 +13,14 @@ public class Room {
         }
     }
 
+    public Room() {
+
+    }
+
+    public Room(Room other) {
+        this.numOfBeds = other.numOfBeds;
+    }
+
     public void setNumOfBeds(int numOfBeds) {
         if (numOfBeds > 4 || 0 >= numOfBeds) {
             System.out.println("4 beds max.");

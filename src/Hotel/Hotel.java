@@ -32,7 +32,7 @@ public class Hotel {
             for (int j = 0; j < allRooms[i].length; j++) {
                 Random beds = new Random();
                 Room myRoom = new Room(beds.nextInt(4)+1);
-                System.out.println("[" + i + "]" + "[" + j + "]" + myRoom);
+                //System.out.println("[" + i + "]" + "[" + j + "]" + myRoom);
                 allRooms[i][j] = myRoom;
             }
         }
@@ -58,21 +58,18 @@ public class Hotel {
 
     public void checkByPassportNumber(int byPassNum) {
         Guest passportNumCheck = new Guest();
-        Room checkByRoom = new Room(getNumOfUsedRooms());
+        Room checkByRoom = new Room();
         for (int i = 0; i < allRooms.length; i++) {
             for (int j = 0; j < allRooms[i].length; j++) {
                 if (checkByRoom.getNumberOfGuestsInRoom() > 0) {
-                    if (boolean containsId = Arrays.(passportNumCheck.getPassportNumber())) {
+                    System.out.printf("Num of guests in room %d is above 0", ((i+1) * 100 + j + 1));
+                    System.out.println(passportNumCheck.ifContainsGuest(byPassNum));
 
-                    }
-                    if (allRooms[i][j].equals(byPassNum)) {
-
-                    }
                 }
-                //if (byPassNum == passportNumCheck.getPassportNumber()) {;
-                //    System.out.println("Test3");
-                //    System.out.println("Your guest resides in room: " );
-                //}
+                if (byPassNum == passportNumCheck.getPassportNumber()) {;
+                    System.out.println("Test3");
+                    System.out.println("Your guest resides in room: " );
+                }
             }
         }
     }
