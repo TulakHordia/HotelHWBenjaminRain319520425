@@ -19,19 +19,6 @@ public class Guest {
         this.passportNumber = other.passportNumber;
     }
 
-    public boolean ifContainsGuest(int contains) {
-        Room passNum = new Room(contains);
-        for (int i = 0; i < this.passportNumber; i++) {
-            if (contains == getPassportNumber()) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        return false;
-    }
-
     public String getName() {
         return this.name;
     }
@@ -49,6 +36,6 @@ public class Guest {
     }
 
     public String toString() {
-        return "Name: " + this.name + " Passport Number: " + this.passportNumber;
+        return "Name: " + this.name + " Passport Number: " + this.passportNumber + " |---| ";
     }
 }

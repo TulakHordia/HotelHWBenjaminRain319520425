@@ -1,13 +1,14 @@
 package Hotel;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Hotel {
 
+    Random rand = new Random();
+    int one = 1, ten = 10, hundred = 100;
+    int resultFloors = rand.nextInt(ten-one) + one;
+    int resultRooms = rand.nextInt(hundred-ten) + ten;
     private static int numOfUsedRooms = 0;
-    private static int floors = 9;
-    private static int rooms = 90;
     private Room[][] allRooms;
 
     public static int getNumOfUsedRooms() {
@@ -27,28 +28,24 @@ public class Hotel {
     }
 
     public Hotel() {
-        this.allRooms = new Room[floors][rooms];
+        this.allRooms = new Room[resultFloors][resultRooms];
         for (int i = 0; i < allRooms.length; i++) {
             for (int j = 0; j < allRooms[i].length; j++) {
                 Random beds = new Random();
                 Room myRoom = new Room(beds.nextInt(4)+1);
-                //System.out.println("[" + i + "]" + "[" + j + "]" + myRoom);
                 allRooms[i][j] = myRoom;
             }
         }
     }
 
     public int addGuests(Guest[] guestsToAddName) {
-        Room numOfGuests = new Room(getNumOfUsedRooms());
         for (int i = 0; i < allRooms.length; i++) {
             for (int j = 0; j < allRooms[i].length; j++) {
                 if (allRooms[i][j].getNumOfAvailableBeds() >= guestsToAddName.length) {
                     if (allRooms[i][j].getNumberOfGuestsInRoom() == 0) {
                         numOfUsedRooms++;
                     }
-                    for (int k = 0; k < guestsToAddName.length; k++) {
-                        allRooms[i][j].insertGuest(guestsToAddName[k]);
-                    }
+                    allRooms[i][j].setAllGuests(guestsToAddName);
                     return ((i+1) * 100 + j + 1);
                 }
             }
@@ -56,21 +53,37 @@ public class Hotel {
         return -1;
     }
 
-    public void checkByPassportNumber(int byPassNum) {
-        Guest passportNumCheck = new Guest();
-        Room checkByRoom = new Room();
+    public int checkByPassportNumber(int byPassNum) {
+        Guest[] guests;
         for (int i = 0; i < allRooms.length; i++) {
             for (int j = 0; j < allRooms[i].length; j++) {
-                if (checkByRoom.getNumberOfGuestsInRoom() > 0) {
-                    System.out.printf("Num of guests in room %d is above 0", ((i+1) * 100 + j + 1));
-                    System.out.println(passportNumCheck.ifContainsGuest(byPassNum));
-
-                }
-                if (byPassNum == passportNumCheck.getPassportNumber()) {;
-                    System.out.println("Test3");
-                    System.out.println("Your guest resides in room: " );
+                if (allRooms[i][j].getNumberOfGuestsInRoom() != 0) {
+                    guests = allRooms[i][j].getAllGuests();
+                    for(Guest passNumGuests : guests) { // for each loop
+                        if (byPassNum == passNumGuests.getPassportNumber()) {
+                            return ((i+1) * 100 + j + 1);
+                        }
+                    }
                 }
             }
         }
+        return -1;
+    }
+
+    public int checkFloorsByRooms() {
+        int counter, maxCount = 0, floorOfMaxCount = 0;
+        for (int i = 0; i < allRooms.length; i++) {
+            counter = 0;
+            for (int j = 0; j < allRooms[i].length; j++) {
+                if (allRooms[i][j].getNumberOfGuestsInRoom() == 0) {
+                    counter++;
+                }
+            }
+            if (counter > maxCount) {
+                maxCount = counter;
+                floorOfMaxCount = i;
+            }
+        }
+        return floorOfMaxCount + 1;
     }
 }

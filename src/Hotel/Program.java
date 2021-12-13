@@ -12,84 +12,84 @@ public class Program {
 
         int choice;
 
-         do {
+        do {
 
-             System.out.println("-----Hotel Menu-----");
-             System.out.println("1. Enter new guests.");
-             System.out.println("2. Find a guest by Passport Number.");
-             System.out.println("3. Floor details.");
-             System.out.println("4. Available rooms.");
-             System.out.println("5. Remove guest.");
+            System.out.println("-----Hotel Menu-----");
+            System.out.println("1. Enter new guests.");
+            System.out.println("2. Find a guest by Passport Number.");
+            System.out.println("3. Available rooms.");
 
-             System.out.println("Type 11 to Exit.");
+            System.out.println("Type 11 to Exit.");
 
-             System.out.println("Enter your choice: ");
-             choice = input.nextInt();
+            System.out.println("Enter your choice: ");
+            choice = input.nextInt();
 
-             switch (choice) {
+            switch (choice) {
 
-                 case 1:
+                case 1:
 
-                     System.out.println("Amount of guests? (Between 1 and 4)");
-                     int amountOfGuests = input.nextInt();
-                     input.nextLine();
+                    System.out.println("Amount of guests? (Between 1 and 4)");
+                    int amountOfGuests = input.nextInt();
+                    input.nextLine();
 
-                     Guest[] guestsInfoName = new Guest[amountOfGuests];
-                     Guest[] guestsInfoPassport = new Guest[amountOfGuests];
-                     Guest[] guests = new Guest[amountOfGuests];
+                    Guest[] guests = new Guest[amountOfGuests];
 
-                     String newGuestName = null;
-                     int newGuestPassportNumber = 0;
+                    String newGuestName = null;
+                    int newGuestPassportNumber = 0;
 
-                     for (int i = 0; i < amountOfGuests; i++) {
+                    for (int i = 0; i < amountOfGuests; i++) {
 
-                         System.out.printf("Enter Guest %d Name: ", (i + 1));
-                         newGuestName = input.nextLine();
+                        System.out.printf("Enter Guest %d Name: ", (i + 1));
+                        newGuestName = input.nextLine();
 
-                         System.out.printf("Enter Guest %d Passport: ", (i + 1));
-                         newGuestPassportNumber = input.nextInt();
-                         input.nextLine();
+                        System.out.printf("Enter Guest %d Passport: ", (i + 1));
+                        newGuestPassportNumber = input.nextInt();
+                        input.nextLine();
 
-                         guests[i] = new Guest(newGuestName, newGuestPassportNumber);
-                     }
+                        while (newGuestPassportNumber <= 0) {
+                            System.out.println("Please type the guests Passport number again: ");
+                            newGuestPassportNumber = input.nextInt();
+                            input.nextLine();
+                        }
+                        guests[i] = new Guest(newGuestName, newGuestPassportNumber);
+                    }
 
-                     System.out.println(Sheraton.addGuests(guests));
+                    System.out.println(Sheraton.addGuests(guests));
 
-                     break;
+                    break;
 
-                 case 2:
+                case 2:
 
-                     System.out.println("Please enter guests passport number: ");
-                     int guestPassportNumber = input.nextInt();
+                    System.out.println("Please enter guests passport number: ");
+                    int guestPassportNumber = input.nextInt();
+                    int check = Sheraton.checkByPassportNumber(guestPassportNumber);
+                    System.out.println(check);
 
-                     Sheraton.checkByPassportNumber(guestPassportNumber);
+                    break;
 
-                     break;
+                case 3:
 
-                 case 3:
+                    System.out.println("The floor #" + Sheraton.checkFloorsByRooms() + " has the most available rooms.");
+                    break;
 
-                 case 4:
+                case 11:
 
-                 case 5:
+                    System.out.println("Exiting program...");
+                    System.exit(0);
+                    break;
 
-                 case 11:
+                default:
+                    System.out.println("Invalid option, please choose again.");
 
-                     System.out.println("Exiting program...");
-                     System.exit(0);
-                     break;
-
-                 default:
-                     System.out.println("Invalid option, please choose again.");
-
-             }
-             System.out.println("\nDo you want to go back to the main menu? (y/n)");
-             char resume = input.next().charAt(0);
-             if (resume == 'y' || resume == 'Y') {
-             } else {
-                 System.out.println("Exiting program...");
-                 System.exit(0);
-             }
-         } while (choice != 11);
+            }
+            System.out.println("\nDo you want to go back to the main menu? (y/n)");
+            char resume = input.next().charAt(0);
+            if (resume == 'y' || resume == 'Y') {
+            } else {
+                System.out.println("Exiting program...");
+                System.exit(0);
+            }
+        } while (choice != 11);
         System.out.println("Exiting program...Thank you!");
         input.close();
     }

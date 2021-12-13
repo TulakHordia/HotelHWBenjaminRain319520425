@@ -17,19 +17,6 @@ public class Room {
 
     }
 
-    public Room(Room other) {
-        this.numOfBeds = other.numOfBeds;
-    }
-
-    public void setNumOfBeds(int numOfBeds) {
-        if (numOfBeds > 4 || 0 >= numOfBeds) {
-            System.out.println("4 beds max.");
-        }
-        else {
-            this.numOfBeds = numOfBeds;
-        }
-    }
-
     public void setAllGuests(Guest[] allGuests) {
         this.allGuests = allGuests;
     }
@@ -40,7 +27,7 @@ public class Room {
 
     public int getNumberOfGuestsInRoom() {
         int counter = 0;
-        if (this.allGuests == null) {
+        if (allGuests == null) {
             return 0;
         }
         else {
@@ -50,16 +37,6 @@ public class Room {
                 }
             }
             return counter;
-        }
-    }
-
-    public void insertGuest(Guest guest) {
-        for (int i = 0; i < allGuests.length; i++) {
-            if (allGuests[i].getName() == null) {
-                allGuests[i].setName(guest.getName());
-                allGuests[i].setPassportNumber(guest.getPassportNumber());
-                return;
-            }
         }
     }
 
