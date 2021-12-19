@@ -36,6 +36,6 @@ public class Guest {
     }
 
     public String toString() {
-        return "Name: " + this.name + " Passport Number: " + this.passportNumber + " |---| ";
+        return "Name: " + this.name + "| Passport Number: " + this.passportNumber;
     }
 }

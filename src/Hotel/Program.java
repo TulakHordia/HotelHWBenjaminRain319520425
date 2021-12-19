@@ -17,7 +17,8 @@ public class Program {
             System.out.println("-----Hotel Menu-----");
             System.out.println("1. Enter new guests.");
             System.out.println("2. Find a guest by Passport Number.");
-            System.out.println("3. Available rooms.");
+            System.out.println("3. All Guests.");
+            System.out.println("4. Available rooms.");
 
             System.out.println("Type 11 to Exit.");
 
@@ -30,6 +31,10 @@ public class Program {
 
                     System.out.println("Amount of guests? (Between 1 and 4)");
                     int amountOfGuests = input.nextInt();
+                    while (amountOfGuests < 1 || amountOfGuests > 4) {
+                        System.out.println("Please try again, guests between 1 and 4 only: ");
+                        amountOfGuests = input.nextInt();
+                    }
                     input.nextLine();
 
                     Guest[] guests = new Guest[amountOfGuests];
@@ -46,7 +51,7 @@ public class Program {
                         newGuestPassportNumber = input.nextInt();
                         input.nextLine();
 
-                        while (newGuestPassportNumber <= 0) {
+                        while (newGuestPassportNumber < 1) {
                             System.out.println("Please type the guests Passport number again: ");
                             newGuestPassportNumber = input.nextInt();
                             input.nextLine();
@@ -68,6 +73,11 @@ public class Program {
                     break;
 
                 case 3:
+
+                    Sheraton.returnAllGuests();
+                    break;
+
+                case 4:
 
                     System.out.println("The floor #" + Sheraton.checkFloorsByRooms() + " has the most available rooms.");
                     break;

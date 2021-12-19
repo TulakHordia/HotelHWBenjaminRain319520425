@@ -1,5 +1,6 @@
 package Hotel;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Hotel {
@@ -85,5 +86,15 @@ public class Hotel {
             }
         }
         return floorOfMaxCount + 1;
+    }
+
+    public void returnAllGuests() {
+        for (int i = 0; i < allRooms.length; i++) {
+            for (int j = 0; j < allRooms[i].length; j++) {
+                if (allRooms[i][j].getNumberOfGuestsInRoom() > 0) {
+                    System.out.print("The guests in room " + ((i+1) * 100 + j + 1) + " are: " + Arrays.toString(allRooms[i][j].getAllGuests()) +"\n");
+                }
+            }
+        }
     }
 }
